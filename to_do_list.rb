@@ -8,7 +8,11 @@ while true
   print "> "
   input = gets.chomp
   system "clear"
-  tasks << input[2..-1]
+  if input[0] == "a"
+    tasks << input[2..-1]
+  else
+    tasks.delete(input[2..-1])
+  end
   puts
   puts "-- Tasks --"
   puts tasks
