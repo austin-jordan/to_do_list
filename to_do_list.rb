@@ -2,9 +2,13 @@
 # Due date
 # Mark as completed
 # Description
-puts "Available commands: (a)dd (d)elete"
 tasks = []
-input = gets.chomp
-tasks << input
-puts tasks
-
+while true
+  puts "Available commands: (a)dd (d)elete"
+  input = gets.chomp
+  tasks << input[2..-1]
+  puts
+  puts "-- Tasks --"
+  puts tasks
+  puts
+end
