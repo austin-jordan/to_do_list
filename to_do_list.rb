@@ -1,7 +1,14 @@
 # Due date
 # Description
 #
-tasks = []
+require 'yaml/store'
+
+store = YAML::Store.new "tasks.yaml"
+tasks = nil
+store.transaction do
+  tasks = store["tasks"] || []
+end
+
 while true
   puts "Available commands: (a)dd (c)hange priority (d)elete"
   print "> "
@@ -26,4 +33,7 @@ while true
   puts "-- Tasks --"
   puts tasks
   puts
+  store.transaction do
+    store["tasks"] = tasks
+  end
 end
