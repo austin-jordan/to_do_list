@@ -1,6 +1,7 @@
 # Change Priority -- Focus on this next
 # Due date
 # Description
+# 
 tasks = []
 while true
   puts "Available commands: (a)dd (d)elete (c)hange priority"
