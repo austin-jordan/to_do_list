@@ -1,6 +1,6 @@
 # Due date
 # Description
-#
+# Clear list
 require 'yaml/store'
 
 store = YAML::Store.new "tasks.yaml"
@@ -10,7 +10,7 @@ store.transaction do
 end
 
 while true
-  puts "Available commands: (a)dd (c)hange priority (d)elete"
+  puts "Available commands: (a)dd (c)hange priority (d)elete (r)eset"
   print "> "
   input = gets.chomp
   command = input[0]
@@ -28,6 +28,8 @@ while true
     tasks.insert(new_task_index, task)
   elsif command == "d"
     tasks.delete(task)
+  elsif command == "r"
+    tasks.clear
   end
   puts
   puts "-- Tasks --"
