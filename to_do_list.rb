@@ -14,7 +14,12 @@ class TaskRepository
     tasks
   end
 
-
+  def self.save(tasks)
+    store = YAML::Store.new "tasks.yaml"
+    store.transaction do
+      store["tasks"] = tasks
+    end
+  end
 end
 
 class ToDoList
@@ -52,9 +57,7 @@ class ToDoList
       elsif command == "r"
         tasks.clear
       end
-      store.transaction do
-        store["tasks"] = tasks
-      end
+      TaskRepository.save(tasks)
     end
   end
 
