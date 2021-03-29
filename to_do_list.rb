@@ -4,13 +4,23 @@
 # Prevent duplicate tasks
 require 'yaml/store'
 
-class ToDoList
-  def main
+class TaskRepository
+  def self.read_all
     store = YAML::Store.new "tasks.yaml"
     tasks = nil
     store.transaction do
       tasks = store["tasks"] || []
     end
+    tasks
+  end
+
+
+end
+
+class ToDoList
+  def main
+    store = YAML::Store.new "tasks.yaml"
+    tasks = TaskRepository.read_all
 
     while true
       puts
