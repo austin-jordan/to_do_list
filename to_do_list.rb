@@ -1,6 +1,7 @@
 # Due date
 # Description
 # Clear list
+# Prevent duplicate tasks
 require 'yaml/store'
 
 store = YAML::Store.new "tasks.yaml"
@@ -10,7 +11,15 @@ store.transaction do
 end
 
 while true
-  puts "Available commands: (a)dd (c)hange priority (d)elete (r)eset"
+  puts
+  puts "-- Tasks --"
+  puts tasks
+  puts
+  puts "-- Available commands --"
+  puts "(a)dd"
+  puts "(c)hange priority"
+  puts "(d)elete"
+  puts "(r)eset"
   print "> "
   input = gets.chomp
   command = input[0]
@@ -31,10 +40,6 @@ while true
   elsif command == "r"
     tasks.clear
   end
-  puts
-  puts "-- Tasks --"
-  puts tasks
-  puts
   store.transaction do
     store["tasks"] = tasks
   end
