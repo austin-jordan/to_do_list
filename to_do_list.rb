@@ -2,7 +2,14 @@
 # Description
 # Clear list
 # Prevent duplicate tasks
-tasks = []
+require 'yaml/store'
+
+store = YAML::Store.new "tasks.yaml"
+tasks = nil
+store.transaction do
+  tasks = store["tasks"] || []
+end
+
 while true
   puts "Available commands: (a)dd task (c)hange priority (d)elete task"
   input = gets.chomp
@@ -22,4 +29,7 @@ while true
   puts "-- Tasks --"
   puts tasks
   puts
+  store.transaction do
+    store["tasks"] = tasks
+  end
 end
