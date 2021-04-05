@@ -9,12 +9,10 @@ class ToDoList
 
   def main
     while true
+      system "clear"
+      display_tasks()
       puts "Available commands: (a)dd task (c)hange priority (d)elete task"
       process_command()
-      puts
-      puts "-- Tasks --"
-      puts tasks
-      puts
       TaskRepository.save(tasks)
     end
   end
@@ -33,6 +31,13 @@ class ToDoList
       tasks.delete_at(tasks.index(task))
       tasks.insert(priority_input.to_i - 1, task)
     end
+  end
+
+  def display_tasks
+    puts
+    puts "-- Tasks --"
+    puts tasks
+    puts
   end
 
   def tasks
