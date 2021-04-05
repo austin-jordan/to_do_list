@@ -8,13 +8,28 @@ require_relative 'task_repository'
 class ToDoList
 
   def main
-    while true
-      system "clear"
-      display_tasks()
-      puts "Available commands: (a)dd task (c)hange priority (d)elete task"
-      process_command()
-      TaskRepository.save(tasks)
+    loop do
+      clear_screen
+      display_tasks
+      display_commands
+      process_command
+      save_tasks
     end
+  end
+
+  def clear_screen
+    system "clear"
+  end
+
+  def display_tasks
+    puts
+    puts "-- Tasks --"
+    puts tasks
+    puts
+  end
+
+  def display_commands
+    puts "Available commands: (a)dd task (c)hange priority (d)elete task"
   end
 
   def process_command()
@@ -33,11 +48,8 @@ class ToDoList
     end
   end
 
-  def display_tasks
-    puts
-    puts "-- Tasks --"
-    puts tasks
-    puts
+  def save_tasks
+    TaskRepository.save(tasks)
   end
 
   def tasks
