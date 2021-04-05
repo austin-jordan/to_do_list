@@ -4,7 +4,7 @@
 # Prevent duplicate tasks
 tasks = []
 while true
-  puts "Available commands: (a)dd task (d)elete task"
+  puts "Available commands: (a)dd task (c)hange priority (d)elete task"
   input = gets.chomp
   command = input[0]
   task = input[2..-1]
@@ -12,6 +12,11 @@ while true
     tasks << task
   elsif command == "d"
     tasks.delete(task)
+  elsif command == "c"
+    puts "What priority do you want to give it"
+    priority_input = gets.chomp
+    tasks.delete_at(tasks.index(task))
+    tasks.insert(priority_input.to_i - 1, task)
   end
   puts
   puts "-- Tasks --"
