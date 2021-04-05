@@ -8,15 +8,14 @@ require_relative 'task_repository'
 class ToDoList
 
   def main
-    @tasks = TaskRepository.read_all
     while true
       puts "Available commands: (a)dd task (c)hange priority (d)elete task"
       process_command()
       puts
       puts "-- Tasks --"
-      puts @tasks
+      puts tasks
       puts
-      TaskRepository.save(@tasks)
+      TaskRepository.save(tasks)
     end
   end
 
@@ -25,15 +24,19 @@ class ToDoList
     command = input[0]
     task = input[2..-1]
     if command == "a"
-      @tasks << task
+      tasks << task
     elsif command == "d"
-      @tasks.delete(task)
+      tasks.delete(task)
     elsif command == "c"
       puts "What priority do you want to give it"
       priority_input = gets.chomp
-      @tasks.delete_at(@tasks.index(task))
-      @tasks.insert(priority_input.to_i - 1, task)
+      tasks.delete_at(tasks.index(task))
+      tasks.insert(priority_input.to_i - 1, task)
     end
+  end
+
+  def tasks
+    @tasks ||= TaskRepository.read_all
   end
 end
 
