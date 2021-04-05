@@ -21,19 +21,19 @@ class ToDoList
   end
 
   def process_command()
-     input = gets.chomp
-     command = input[0]
-      task = input[2..-1]
-      if command == "a"
-        @tasks << task
-      elsif command == "d"
-        @tasks.delete(task)
-      elsif command == "c"
-        puts "What priority do you want to give it"
-        priority_input = gets.chomp
-        @tasks.delete_at(@tasks.index(task))
-        @tasks.insert(priority_input.to_i - 1, task)
-      end
+    input = gets.chomp
+    command = input[0]
+    task = input[2..-1]
+    if command == "a"
+      @tasks << task
+    elsif command == "d"
+      @tasks.delete(task)
+    elsif command == "c"
+      puts "What priority do you want to give it"
+      priority_input = gets.chomp
+      @tasks.delete_at(@tasks.index(task))
+      @tasks.insert(priority_input.to_i - 1, task)
+    end
   end
 end
 
