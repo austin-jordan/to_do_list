@@ -3,15 +3,11 @@
 # Clear list
 # Prevent duplicate tasks
 require 'yaml/store'
+require_relative 'task_repository'
 
 class ToDoList
   def main
-    store = YAML::Store.new "tasks.yaml"
-    tasks = nil
-    store.transaction do
-      tasks = store["tasks"] || []
-    end
-
+    tasks = TaskRepository.read_all
     while true
       puts "Available commands: (a)dd task (c)hange priority (d)elete task"
       input = gets.chomp
@@ -31,9 +27,7 @@ class ToDoList
       puts "-- Tasks --"
       puts tasks
       puts
-      store.transaction do
-        store["tasks"] = tasks
-      end
+      TaskRepository.save(tasks)
     end
   end
 end
