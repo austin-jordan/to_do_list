@@ -6,29 +6,34 @@ require 'yaml/store'
 require_relative 'task_repository'
 
 class ToDoList
+
   def main
-    tasks = TaskRepository.read_all
+    @tasks = TaskRepository.read_all
     while true
       puts "Available commands: (a)dd task (c)hange priority (d)elete task"
-      input = gets.chomp
-      command = input[0]
+      process_command()
+      puts
+      puts "-- Tasks --"
+      puts @tasks
+      puts
+      TaskRepository.save(@tasks)
+    end
+  end
+
+  def process_command()
+     input = gets.chomp
+     command = input[0]
       task = input[2..-1]
       if command == "a"
-        tasks << task
+        @tasks << task
       elsif command == "d"
-        tasks.delete(task)
+        @tasks.delete(task)
       elsif command == "c"
         puts "What priority do you want to give it"
         priority_input = gets.chomp
-        tasks.delete_at(tasks.index(task))
-        tasks.insert(priority_input.to_i - 1, task)
+        @tasks.delete_at(@tasks.index(task))
+        @tasks.insert(priority_input.to_i - 1, task)
       end
-      puts
-      puts "-- Tasks --"
-      puts tasks
-      puts
-      TaskRepository.save(tasks)
-    end
   end
 end
 

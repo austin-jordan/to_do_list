@@ -12,7 +12,7 @@ class TaskRepository
   def self.save(tasks)
     store = YAML::Store.new "tasks.yaml"
     store.transaction do
-        store["tasks"] = tasks
-      end
+      store["tasks"] = tasks
+    end
   end
 end
