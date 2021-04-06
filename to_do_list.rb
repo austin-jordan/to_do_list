@@ -43,8 +43,7 @@ class ToDoList
     elsif command == "c"
       puts "What priority do you want to give it"
       priority_input = gets.chomp
-      tasks.delete_at(tasks.index(task))
-      tasks.insert(priority_input.to_i - 1, task)
+      change_priority(priority_input, task)
     end
   end
 
@@ -52,9 +51,15 @@ class ToDoList
     TaskRepository.save(tasks)
   end
 
+  def change_priority(priority_input, task)
+    tasks.delete_at(tasks.index(task))
+    tasks.insert(priority_input.to_i - 1, task)
+  end
+
   def tasks
     @tasks ||= TaskRepository.read_all
   end
+
 end
 
 to_do_list = ToDoList.new()
