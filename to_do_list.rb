@@ -38,13 +38,13 @@ class ToDoList
     if command == "a"
       add_task(task)
     elsif command == "d"
-      tasks.delete(task)
+      delete_task
     elsif command == "c"
       puts "What priority do you want to give it"
       priority_input = gets.chomp
       change_priority(priority_input, task)
     elsif command == "r"
-      tasks.clear
+      reset_list
     end
   end
 
@@ -56,9 +56,17 @@ class ToDoList
     tasks << task unless tasks.include?(task)
   end
 
+  def delete_task(task)
+    tasks.delete(task)
+  end
+
   def change_priority(priority_input, task)
     tasks.delete_at(tasks.index(task))
     tasks.insert(priority_input.to_i - 1, task)
+  end
+
+  def reset_list
+    tasks.clear
   end
 
   def tasks
