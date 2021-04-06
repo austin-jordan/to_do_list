@@ -37,7 +37,7 @@ class ToDoList
     command = input[0]
     task = input[2..-1]
     if command == "a"
-      tasks << task
+      add_task(task)
     elsif command == "d"
       tasks.delete(task)
     elsif command == "c"
@@ -49,6 +49,10 @@ class ToDoList
 
   def save_tasks
     TaskRepository.save(tasks)
+  end
+
+  def add_task(task)
+    tasks << task unless tasks.include?(task)
   end
 
   def change_priority(priority_input, task)
