@@ -1,7 +1,6 @@
 # Due date
 # Description
 # Clear list
-# Prevent duplicate tasks
 require 'yaml/store'
 require_relative 'task_repository'
 
@@ -29,7 +28,7 @@ class ToDoList
   end
 
   def display_commands
-    puts "Available commands: (a)dd task (c)hange priority (d)elete task"
+    puts "Available commands: (a)dd task (c)hange priority (d)elete task (r)eset list"
   end
 
   def process_command()
@@ -44,6 +43,8 @@ class ToDoList
       puts "What priority do you want to give it"
       priority_input = gets.chomp
       change_priority(priority_input, task)
+    elsif command == "r"
+      tasks.clear
     end
   end
 
