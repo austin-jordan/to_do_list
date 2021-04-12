@@ -2,7 +2,6 @@ require 'yaml/store'
 require_relative 'task_repository'
 
 class AddTask
-
   def self.run(tasks, task)
     tasks << task
   end
@@ -24,7 +23,7 @@ class ChangePriority
 end
 
 class ResetList
-  def self.run(tasks)
+  def self.run(tasks, _task)
     tasks.clear
   end
 end
@@ -58,16 +57,21 @@ class ToDoList
   def process_command
     input = gets.chomp
     command = input[0]
+    command_class = command_class_for(command)
     task = input[2..-1]
-    case command
+    command_class.run(tasks, task)
+  end
+
+  def command_class_for(command_string)
+    case command_string
     when 'a'
-      AddTask.run(tasks, task)
+      AddTask
     when 'd'
-      DeleteTask.run(tasks, task)
+      DeleteTask
     when 'c'
-      ChangePriority.run(tasks, task)
+      ChangePriority
     when 'r'
-      ResetList.run(tasks)
+      ResetList
     end
   end
 
