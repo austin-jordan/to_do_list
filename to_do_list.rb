@@ -85,18 +85,8 @@ class ToDoList
   end
 
   def command_class_for(command_string)
-    case command_string
-    when AddTask.command_string
-      AddTask
-    when DeleteTask.command_string
-      DeleteTask
-    when ChangePriority.command_string
-      ChangePriority
-    when ResetList.command_string
-      ResetList
-    else
-      NullCommand
-    end
+    commands = [AddTask, DeleteTask, ChangePriority, ResetList]
+    commands.find { |command| command.command_string == command_string }
   end
 
   def save_tasks
