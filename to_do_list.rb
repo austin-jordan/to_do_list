@@ -1,6 +1,13 @@
 require 'yaml/store'
 require_relative 'task_repository'
 
+class AddTask
+
+  def self.run(tasks, task)
+    tasks << task
+  end
+end
+
 class ToDoList
   def main
     loop do
@@ -33,7 +40,7 @@ class ToDoList
     task = input[2..-1]
     case command
     when 'a'
-      add_task(task)
+      AddTask.run(tasks, task)
     when 'd'
       delete_task(task)
     when 'c'
