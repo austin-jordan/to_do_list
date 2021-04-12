@@ -28,6 +28,12 @@ class ResetList
   end
 end
 
+class NullCommand
+  def self.run(_tasks, _task)
+    # No-Op
+  end
+end
+
 class ToDoList
   def main
     loop do
@@ -72,6 +78,8 @@ class ToDoList
       ChangePriority
     when 'r'
       ResetList
+    else
+      NullCommand
     end
   end
 
