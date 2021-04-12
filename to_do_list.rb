@@ -87,7 +87,12 @@ class ToDoList
   end
 
   def command_class_for(command_string)
-    COMMANDS.find { |command| command.command_string == command_string }
+    command = COMMANDS.find { |command| command.command_string == command_string }
+    if command ==  nil
+      NullCommand
+    else
+      command
+    end
   end
 
   def save_tasks
