@@ -5,11 +5,19 @@ class AddTask
   def self.run(tasks, task)
     tasks << task
   end
+
+  def self.command_string
+    'a'
+  end
 end
 
 class DeleteTask
   def self.run(tasks, task)
     tasks.delete(task)
+  end
+
+  def self.command_string
+    'd'
   end
 end
 
@@ -20,11 +28,19 @@ class ChangePriority
     tasks.delete_at(tasks.index(task))
     tasks.insert(priority_input.to_i - 1, task)
   end
+
+  def self.command_string
+    'c'
+  end
 end
 
 class ResetList
   def self.run(tasks, _task)
     tasks.clear
+  end
+
+  def self.command_string
+    'r'
   end
 end
 
@@ -70,13 +86,13 @@ class ToDoList
 
   def command_class_for(command_string)
     case command_string
-    when 'a'
+    when AddTask.command_string
       AddTask
-    when 'd'
+    when DeleteTask.command_string
       DeleteTask
-    when 'c'
+    when ChangePriority.command_string
       ChangePriority
-    when 'r'
+    when ResetList.command_string
       ResetList
     else
       NullCommand
