@@ -8,6 +8,12 @@ class AddTask
   end
 end
 
+class DeleteTask
+  def self.run(tasks, task)
+    tasks.delete(task)
+  end
+end
+
 class ToDoList
   def main
     loop do
@@ -42,7 +48,7 @@ class ToDoList
     when 'a'
       AddTask.run(tasks, task)
     when 'd'
-      delete_task(task)
+      DeleteTask.run(tasks, task)
     when 'c'
       change_priority(task)
     when 'r'
@@ -52,14 +58,6 @@ class ToDoList
 
   def save_tasks
     TaskRepository.save(tasks)
-  end
-
-  def add_task(task)
-    tasks << task
-  end
-
-  def delete_task(task)
-    tasks.delete(task)
   end
 
   def change_priority(task)
