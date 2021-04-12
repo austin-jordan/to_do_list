@@ -35,11 +35,9 @@ class ToDoList
     when 'a'
       add_task(task)
     when 'd'
-      delete_task
+      delete_task(task)
     when 'c'
-      puts 'What priority do you want to give it'
-      priority_input = gets.chomp
-      change_priority(priority_input, task)
+      change_priority(task)
     when 'r'
       reset_list
     end
@@ -50,14 +48,16 @@ class ToDoList
   end
 
   def add_task(task)
-    tasks << task unless tasks.include?(task)
+    tasks << task
   end
 
   def delete_task(task)
     tasks.delete(task)
   end
 
-  def change_priority(priority_input, task)
+  def change_priority(task)
+    puts 'What priority do you want to give it'
+    priority_input = gets.chomp
     tasks.delete_at(tasks.index(task))
     tasks.insert(priority_input.to_i - 1, task)
   end
