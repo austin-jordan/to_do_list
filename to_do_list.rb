@@ -1,11 +1,7 @@
-# Due date
-# Description
-# Clear list
 require 'yaml/store'
 require_relative 'task_repository'
 
 class ToDoList
-
   def main
     loop do
       clear_screen
@@ -17,33 +13,34 @@ class ToDoList
   end
 
   def clear_screen
-    system "clear"
+    system 'clear'
   end
 
   def display_tasks
     puts
-    puts "-- Tasks --"
+    puts '-- Tasks --'
     puts tasks
     puts
   end
 
   def display_commands
-    puts "Available commands: (a)dd task (c)hange priority (d)elete task (r)eset list"
+    puts 'Available commands: (a)dd task (c)hange priority (d)elete task (r)eset list'
   end
 
-  def process_command()
+  def process_command
     input = gets.chomp
     command = input[0]
     task = input[2..-1]
-    if command == "a"
+    case command
+    when 'a'
       add_task(task)
-    elsif command == "d"
+    when 'd'
       delete_task
-    elsif command == "c"
-      puts "What priority do you want to give it"
+    when 'c'
+      puts 'What priority do you want to give it'
       priority_input = gets.chomp
       change_priority(priority_input, task)
-    elsif command == "r"
+    when 'r'
       reset_list
     end
   end
@@ -72,8 +69,7 @@ class ToDoList
   def tasks
     @tasks ||= TaskRepository.read_all
   end
-
 end
 
-to_do_list = ToDoList.new()
+to_do_list = ToDoList.new
 to_do_list.main
