@@ -14,6 +14,15 @@ class DeleteTask
   end
 end
 
+class ChangePriority
+  def self.run(tasks, task)
+    puts 'What priority do you want to give it'
+    priority_input = gets.chomp
+    tasks.delete_at(tasks.index(task))
+    tasks.insert(priority_input.to_i - 1, task)
+  end
+end
+
 class ToDoList
   def main
     loop do
@@ -50,7 +59,7 @@ class ToDoList
     when 'd'
       DeleteTask.run(tasks, task)
     when 'c'
-      change_priority(task)
+      ChangePriority.run(tasks, task)
     when 'r'
       reset_list
     end
