@@ -51,6 +51,8 @@ class NullCommand
 end
 
 class ToDoList
+  COMMANDS = [AddTask, DeleteTask, ChangePriority, ResetList]
+
   def main
     loop do
       clear_screen
@@ -85,8 +87,7 @@ class ToDoList
   end
 
   def command_class_for(command_string)
-    commands = [AddTask, DeleteTask, ChangePriority, ResetList]
-    commands.find { |command| command.command_string == command_string }
+    COMMANDS.find { |command| command.command_string == command_string }
   end
 
   def save_tasks
