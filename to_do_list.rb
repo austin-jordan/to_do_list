@@ -23,6 +23,12 @@ class ChangePriority
   end
 end
 
+class ResetList
+  def self.run(tasks)
+    tasks.clear
+  end
+end
+
 class ToDoList
   def main
     loop do
@@ -61,23 +67,12 @@ class ToDoList
     when 'c'
       ChangePriority.run(tasks, task)
     when 'r'
-      reset_list
+      ResetList.run(tasks)
     end
   end
 
   def save_tasks
     TaskRepository.save(tasks)
-  end
-
-  def change_priority(task)
-    puts 'What priority do you want to give it'
-    priority_input = gets.chomp
-    tasks.delete_at(tasks.index(task))
-    tasks.insert(priority_input.to_i - 1, task)
-  end
-
-  def reset_list
-    tasks.clear
   end
 
   def tasks
