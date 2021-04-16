@@ -5,13 +5,18 @@ class ToDoList
     while true
       puts '-- Tasks --'
       puts tasks
-      puts "Available commands -- (a)dd task (d)elete task"
+      puts "Available commands -- (a)dd task (c)hange priority (d)elete task"
       input = gets.chomp
       command = input[0]
       task = input[1..-1]
       if command == 'a'
         tasks << task
-      elsif command == "d"
+      elsif command == 'c'
+        puts "What priority would you like to give this task?"
+        priority_input = gets.chomp
+        tasks.delete(task)
+        tasks.insert(priority_input.to_i - 1, task)
+      elsif command == 'd'
         tasks.delete(task)
       end
     end
