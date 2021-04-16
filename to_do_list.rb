@@ -2,13 +2,16 @@ class ToDoList
 
   def main
     tasks = []
-    puts tasks
-    puts "Available commands -- (a)dd task"
-    input = gets.chomp
-    command = input[0]
-    task = input[1..-1]
-    if command == 'a'
-      tasks << task
+    while true
+      puts '-- Tasks --'
+      puts tasks
+      puts "Available commands -- (a)dd task"
+      input = gets.chomp
+      command = input[0]
+      task = input[1..-1]
+      if command == 'a'
+        tasks << task
+      end
     end
   end
 
