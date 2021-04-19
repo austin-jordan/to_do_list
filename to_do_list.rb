@@ -25,7 +25,7 @@ class ToDoList
   end
 
   def display_commands
-    puts 'Available commands: (a)dd task (c)hange priority (d)elete task (r)eset list'
+    puts Commands.command_list
   end
 
   def process_command

@@ -11,4 +11,8 @@ class Commands
     command = COMMANDS.find { |command| command.command_string == command_string }
     command || NullCommand
   end
+
+  def self.command_list
+    "Available commands: #{AddTask.command_description} #{ChangePriority.command_description} #{DeleteTask.command_description} #{ResetList.command_description}"
+  end
 end

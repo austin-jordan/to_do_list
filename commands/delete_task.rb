@@ -6,4 +6,8 @@ class DeleteTask
   def self.command_string
     'd'
   end
+
+  def self.command_description
+    '(d)elete task'
+  end
 end

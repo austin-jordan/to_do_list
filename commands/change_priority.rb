@@ -9,4 +9,8 @@ class ChangePriority
   def self.command_string
     'c'
   end
+
+  def self.command_description
+    '(c)hange priority'
+  end
 end
