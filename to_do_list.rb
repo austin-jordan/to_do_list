@@ -1,54 +1,10 @@
 require 'yaml/store'
 require_relative 'task_repository'
-
-class AddTask
-  def self.run(tasks, task)
-    tasks << task
-  end
-
-  def self.command_string
-    'a'
-  end
-end
-
-class DeleteTask
-  def self.run(tasks, task)
-    tasks.delete(task)
-  end
-
-  def self.command_string
-    'd'
-  end
-end
-
-class ChangePriority
-  def self.run(tasks, task)
-    puts 'What priority do you want to give it'
-    priority_input = gets.chomp
-    tasks.delete_at(tasks.index(task))
-    tasks.insert(priority_input.to_i - 1, task)
-  end
-
-  def self.command_string
-    'c'
-  end
-end
-
-class ResetList
-  def self.run(tasks, _task)
-    tasks.clear
-  end
-
-  def self.command_string
-    'r'
-  end
-end
-
-class NullCommand
-  def self.run(_tasks, _task)
-    # No-Op
-  end
-end
+require_relative 'add_task'
+require_relative 'change_priority'
+require_relative 'delete_task'
+require_relative 'null_command'
+require_relative 'reset_list'
 
 class ToDoList
   COMMANDS = [AddTask, DeleteTask, ChangePriority, ResetList]
