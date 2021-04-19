@@ -1,10 +1,10 @@
 require 'yaml/store'
 require_relative 'task_repository'
-require_relative 'add_task'
-require_relative 'change_priority'
-require_relative 'delete_task'
-require_relative 'null_command'
-require_relative 'reset_list'
+require_relative 'commands/add_task'
+require_relative 'commands/change_priority'
+require_relative 'commands/delete_task'
+require_relative 'commands/null_command'
+require_relative 'commands/reset_list'
 
 class ToDoList
   COMMANDS = [AddTask, DeleteTask, ChangePriority, ResetList]
