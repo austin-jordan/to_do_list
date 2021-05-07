@@ -25,7 +25,7 @@ class ToDoList
   end
 
   def display_commands
-    puts Commands.command_list
+    puts "Available commands: #{Commands.command_list}"
   end
 
   def process_command

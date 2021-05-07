@@ -2,7 +2,7 @@ class AddTask
   def self.run(tasks, task)
     tasks << task
   end
-
+  #use class name to create command list
   def self.command_string
     'a'
   end

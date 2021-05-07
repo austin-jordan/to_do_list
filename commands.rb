@@ -5,7 +5,7 @@ require_relative 'commands/null_command'
 require_relative 'commands/reset_list'
 
 class Commands
-  COMMANDS = [AddTask, DeleteTask, ChangePriority, ResetList]
+  COMMANDS = [AddTask, ChangePriority, DeleteTask, ResetList]
 
   def self.command_class_for(command_string)
     command = COMMANDS.find { |command| command.command_string == command_string }
@@ -13,6 +13,7 @@ class Commands
   end
 
   def self.command_list
-    "Available commands: #{AddTask.command_description} #{ChangePriority.command_description} #{DeleteTask.command_description} #{ResetList.command_description}"
+    #replace list with map and join
+    "#{AddTask.command_description} #{ChangePriority.command_description} #{DeleteTask.command_description} #{ResetList.command_description}"
   end
 end
