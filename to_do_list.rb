@@ -3,6 +3,16 @@ require_relative 'task_repository'
 require_relative 'commands'
 
 class ToDoList
+  TESTING = true
+  TEST_COMMANDS = [
+    "a buy rice",
+    "r",
+    "a buy ice cream",
+    "a buy eggs",
+    "d buy eggs",
+    "q"
+  ]
+
   def main
     loop do
       clear_screen
@@ -29,7 +39,12 @@ class ToDoList
   end
 
   def process_command
-    input = gets.chomp
+    if TESTING
+      input = TEST_COMMANDS.shift
+      puts "Test input: #{input}"
+    else
+      input = gets.chomp
+    end
     command = input[0]
     command_class = Commands.command_class_for(command)
     task = input[2..-1]
