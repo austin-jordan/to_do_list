@@ -39,16 +39,17 @@ class ToDoList
   end
 
   def process_command
+    Commands.command_for(fetch_input).run(tasks)
+  end
+
+  def fetch_input
     if TESTING
       input = TEST_COMMANDS.shift
       puts "Test input: #{input}"
     else
       input = gets.chomp
     end
-    command = input[0]
-    command_class = Commands.command_class_for(command)
-    task = input[2..-1]
-    command_class.run(tasks, task)
+    input
   end
 
   def save_tasks

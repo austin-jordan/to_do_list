@@ -1,5 +1,7 @@
-class ChangePriority
-  def self.run(tasks, task)
+require_relative 'command'
+
+class ChangePriority < Command
+  def do_run(tasks, task)
     puts 'What priority do you want to give it'
     priority_input = gets.chomp
     tasks.delete_at(tasks.index(task))

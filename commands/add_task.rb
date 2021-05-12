@@ -1,5 +1,7 @@
-class AddTask
-  def self.run(tasks, task)
+require_relative 'command'
+
+class AddTask < Command
+  def do_run(tasks, task)
     tasks << task
   end
   #use class name to create command list

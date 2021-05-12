@@ -1,5 +1,7 @@
-class DeleteTask
-  def self.run(tasks, task)
+require_relative 'command'
+
+class DeleteTask < Command
+  def do_run(tasks, task)
     tasks.delete(task)
   end
 

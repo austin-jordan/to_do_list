@@ -1,5 +1,7 @@
-class Quit
-  def self.run(tasks, task)
+require_relative 'command'
+
+class Quit < Command
+  def do_run(tasks, task)
     exit
   end
 
