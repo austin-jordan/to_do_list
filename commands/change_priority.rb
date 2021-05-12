@@ -8,8 +8,8 @@ class ChangePriority < Command
     tasks.insert(priority_input.to_i - 1, task)
   end
 
-  def self.command_string
-    'c'
+  def self.match?(command_text)
+    command_text[0] == 'c'
   end
 
   def self.command_description

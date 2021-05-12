@@ -5,8 +5,8 @@ class ResetList < Command
     tasks.clear
   end
 
-  def self.command_string
-    'r'
+  def self.match?(command_text)
+    command_text[0] == 'r'
   end
 
   def self.command_description

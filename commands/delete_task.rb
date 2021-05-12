@@ -5,8 +5,8 @@ class DeleteTask < Command
     tasks.delete(task)
   end
 
-  def self.command_string
-    'd'
+  def self.match?(command_text)
+    command_text[0] == 'd'
   end
 
   def self.command_description

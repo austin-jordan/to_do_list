@@ -6,8 +6,8 @@ class Quit < Command
   end
 
   #use class name to create command list
-  def self.command_string
-    'q'
+  def self.match?(command_text)
+    command_text[0] == 'q'
   end
 
   def self.command_description
