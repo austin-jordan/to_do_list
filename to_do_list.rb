@@ -1,48 +1,65 @@
-# Due date
-# Description
-# Clear list
-# Prevent duplicate tasks
-require_relative "task_repository"
+require 'yaml/store'
+require_relative 'task_repository'
+require_relative 'commands'
 
 class ToDoList
-  def main
-    tasks = TaskRepository.read_all
+  TESTING = true
+  TEST_COMMANDS = [
+    "a buy rice",
+    "r",
+    "a buy ice cream",
+    "a buy eggs",
+    "d buy eggs",
+    "q"
+  ]
 
-    while true
-      puts
-      puts "-- Tasks --"
-      puts tasks
-      puts
-      puts "-- Available commands --"
-      puts "(a)dd"
-      puts "(c)hange priority"
-      puts "(d)elete"
-      puts "(r)eset"
-      print "> "
-      input = gets.chomp
-      command = input[0]
-      task = input[2..-1]
-      system "clear"
-      if command == "a"
-        tasks << task
-      elsif command == "c"
-        puts "What priority do you want to give it?"
-        print"> "
-        priority_input = gets.chomp
-        new_task_index = priority_input.to_i - 1
-        old_task_index = tasks.index(task)
-        tasks.delete_at(old_task_index)
-        tasks.insert(new_task_index, task)
-      elsif command == "d"
-        tasks.delete(task)
-      elsif command == "r"
-        tasks.clear
-      end
-      TaskRepository.save(tasks)
+  def main
+    loop do
+      clear_screen
+      display_tasks
+      display_commands
+      process_command
+      save_tasks
     end
   end
 
+  def clear_screen
+    system 'clear'
+  end
+
+  def display_tasks
+    puts
+    puts '-- Tasks --'
+    puts tasks
+    puts
+  end
+
+  def display_commands
+    puts "Available commands: #{Commands.command_list}"
+  end
+
+  def process_command
+    Commands.command_for(fetch_input).run(tasks)
+  end
+
+  def fetch_input
+    if TESTING
+      input = TEST_COMMANDS.shift
+      puts "Test input: #{input}"
+    else
+      input = gets.chomp
+    end
+    input
+  end
+
+  def save_tasks
+    TaskRepository.save(tasks)
+  end
+
+  def tasks
+    @tasks ||= TaskRepository.read_all
+  end
 end
 
-to_do_list = ToDoList.new()
+to_do_list = ToDoList.new
 to_do_list.main
